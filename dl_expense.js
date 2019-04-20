@@ -5,8 +5,8 @@
    Tutorial 13
    Case Problem 2
 
-   Author: 
-   Date:   
+   Author: Anthony Arias
+   Date:   4/18/19
    
    Filename: dl_expenses.js
    
@@ -30,7 +30,11 @@
       Formats the value, "val", as U.S. currency.
       
 */
+window.onload = function () {
+      var changingCells = document.input.travelEXp;
+      changingCells.onchange = calcExp;
 
+}
 
 
 
@@ -39,10 +43,15 @@
 
 
 function formatNumber(val, decimals) {
-   return val.toLocaleString(undefined, {minimumFractionDigits: decimals, 
-                                         maximumFractionDigits: decimals});
+      return val.toLocaleString(undefined, {
+            minimumFractionDigits: decimals,
+            maximumFractionDigits: decimals
+      });
 }
 
 function formatUSCurrency(val) {
-   return val.toLocaleString('en-US', {style: "currency", currency: "USD"} );
+      return val.toLocaleString('en-US', {
+            style: "currency",
+            currency: "USD"
+      });
 }
