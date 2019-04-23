@@ -31,12 +31,44 @@
       
 */
 window.onload = function () {
-      var changingCells = document.input.travelEXp;
-      changingCells.onchange = calcExp;
-
+      var changingCells = document.querySelectorAll('input[class="sum"]');
+      for (var i = 0; i < changingCells.length; i++) {
+            changingCells.onchange = calcExp;
+      }
+      document.getElementById("submitButton").onclick = validateSummary;
 }
 
+function validateSummary() {
+      var neglect = document.getElementById("summary");
+      if (neglect.validity.valueMissing) {
+            neglect.setCustomValidity("You must include a summary of the trip in your report");
+      } else {
+            neglect.setCustomValidity("");
+      }
+}
+//This function is to sum the values of input elements belonging to the sumClass class of elements.
+function calcClass(sumClass) {
+      var sumFields = document.getElementsByClassName(sumClass);
+      //this variable keeps a running total of the total values in the input elements in the sumFields object collection.
+      var sumTotal = 0;
+      for (var i = 0; i < sumFields.length; i++) {
+            var itemValue = parseFloat(sumFields[i].value)
+            if (!isNaN(itemValue)) {
+                  itemValue += sumFields;
+            } else {
+                  return sumTotal;
+            }
+      }
+}
 
+//this function is to calculate the row and column totals from the travelExp table
+function calcExp() {
+      var expTable = document.querySelectorAll("table#travelExp tbody tr");
+
+      for (var i = 0; i < expTable.length; i++) {
+
+      }
+}
 
 
 
