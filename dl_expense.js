@@ -31,13 +31,14 @@
       
 */
 window.onload = function () {
-      var changingCells = document.querySelectorAll('input[class="sum"]');
+      var changingCells = document.querySelectorAll("table#travelExp input.sum");
       for (var i = 0; i < changingCells.length; i++) {
-            changingCells.onchange = calcExp;
+            changingCells[i].onchange = calcExp;
       }
       document.getElementById("submitButton").onclick = validateSummary;
 }
 
+//This function makes an alert message to the user when he or she doesn't fill out the summary report correct.
 function validateSummary() {
       var neglect = document.getElementById("summary");
       if (neglect.validity.valueMissing) {
@@ -54,11 +55,10 @@ function calcClass(sumClass) {
       for (var i = 0; i < sumFields.length; i++) {
             var itemValue = parseFloat(sumFields[i].value)
             if (!isNaN(itemValue)) {
-                  itemValue += sumFields;
-            } else {
-                  return sumTotal;
-            }
+                  sumTotal += itemValue;
+            }  
       }
+      return sumTotal;
 }
 
 //this function is to calculate the row and column totals from the travelExp table
@@ -66,8 +66,15 @@ function calcExp() {
       var expTable = document.querySelectorAll("table#travelExp tbody tr");
 
       for (var i = 0; i < expTable.length; i++) {
-
+            document.getElementById("subtotal" + i).value = formatNumber(calcClass("date" + i), 2);
       }
+      //These input elements track the totals of each column and makes it to a 2 decimal places.
+      document.getElementById("transTotal").value = formatNumber(calcClass("trans"), 2);
+      document.getElementById("lodgeTotal").value = formatNumber(calcClass("lodge"), 2);
+      document.getElementById("mealTotal").value = formatNumber(calcClass("meal"), 2);
+      document.getElementById("otherTotal").value = formatNumber(calcClass("other"), 2);
+
+      document.getElementById("expTotal").value = formatUSCurrency(calcClass("sum"));
 }
 
 
